@@ -1,0 +1,6 @@
+{
+  "name": "ミニだるまスクラッチ",
+  "description": "縁日のお祭りをイメージしたレトロで楽しい4マスのミニだるまスクラッチくじ。指やマウスで削ってだるまを集めよう！",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

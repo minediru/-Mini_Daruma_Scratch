@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ミニだるまスクラッチ</title>
+    <meta name="description" content="縁日のお祭りをイメージしたレトロで楽しい4マスのミニだるまスクラッチくじ。指やマウスで削ってだるまを集めよう！" />
+    <meta property="og:title" content="ミニだるまスクラッチ" />
+    <meta property="og:description" content="縁日のお祭りをイメージしたレトロで楽しい4マスのミニだるまスクラッチくじ。指やマウスで削ってだるまを集めよう！" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="daruma.svg" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Yuji+Mai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Background festive decorative clouds and lanterns -->
+    <div class="festival-bg" aria-hidden="true">
+      <div class="lantern lantern-left">
+        <span class="lantern-text">祭</span>
+      </div>
+      <div class="lantern lantern-right">
+        <span class="lantern-text">福</span>
+      </div>
+      <!-- Bunting Garlands (三角旗・万国旗風) -->
+      <div class="garland-row">
+        <span class="garland-flag flag-red"></span>
+        <span class="garland-flag flag-white"></span>
+        <span class="garland-flag flag-yellow"></span>
+        <span class="garland-flag flag-blue"></span>
+        <span class="garland-flag flag-green"></span>
+        <span class="garland-flag flag-red"></span>
+        <span class="garland-flag flag-white"></span>
+        <span class="garland-flag flag-yellow"></span>
+        <span class="garland-flag flag-blue"></span>
+        <span class="garland-flag flag-green"></span>
+        <span class="garland-flag flag-red"></span>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="game-container">
+      <!-- Hanging Paper Tags & Stickers around the stall (ごちゃっとした縁日装飾) -->
+      <div class="stall-decorations-top" aria-hidden="true">
+        <div class="hanging-strip strip-left-1">
+          <span class="strip-text">大盤振舞</span>
+        </div>
+        <div class="hanging-strip strip-left-2">
+          <span class="strip-text">特賞続出中</span>
+        </div>
+        <div class="hanging-strip strip-right-1">
+          <span class="strip-text">運だめし</span>
+        </div>
+        <div class="hanging-strip strip-right-2">
+          <span class="strip-text">千客万来</span>
+        </div>
+      </div>
+
+      <!-- Festival Header -->
+      <header class="game-header">
+        <div class="stall-roof">
+          <div class="roof-stripes"></div>
+        </div>
+
+        <!-- Cluttered Sticker Badges on the stall board -->
+        <div class="header-stickers" aria-hidden="true">
+          <div class="sticker sticker-pop">
+            <span>✨ 名物</span>
+          </div>
+          <div class="sticker sticker-hit">
+            <span>大当り</span>
+          </div>
+          <div class="sticker sticker-price">
+            <span>1回 百文</span>
+          </div>
+        </div>
+
+        <div class="title-board">
+          <div class="sub-badge">縁日屋台の運だめし</div>
+          <h1 class="main-title">
+            <span class="title-icon">🏮</span>
+            <span>ミニだるまスクラッチ</span>
+            <span class="title-icon">🏮</span>
+          </h1>
+          <p class="guide-text">
+            4つのマスを指やマウスでけずってね！<br>
+            <span class="guide-sub">（45%以上けずるとパッと開きます）</span>
+          </p>
+        </div>
+
+        <!-- Controls Bar: Sound toggle, quick reveal & scratch progress -->
+        <div class="status-bar">
+          <div class="progress-box">
+            <span class="progress-label">けずった数:</span>
+            <span id="scratchCount" class="progress-val">0</span>
+            <span class="progress-total">/ 4</span>
+          </div>
+          <div class="status-actions">
+            <button id="soundToggleBtn" class="action-btn-small" type="button" aria-label="効果音の切り替え">
+              <span id="soundIcon">🔊</span>
+              <span id="soundText" class="sr-only">音ON</span>
+            </button>
+            <button id="scratchAllBtn" class="action-btn-small" type="button" title="すべて開く">
+              <span>一括オープン</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2x2 Scratch Grid Area -->
+      <section class="scratch-grid-section" aria-label="スクラッチカード">
+        <!-- Playful tape / seal stickers on the board frame -->
+        <div class="grid-decorations" aria-hidden="true">
+          <div class="corner-tape tape-tl"></div>
+          <div class="corner-tape tape-tr"></div>
+          <div class="seal-badge badge-center">
+            <span>福運招来</span>
+          </div>
+        </div>
+
+        <div id="scratchGrid" class="scratch-grid">
+          <!-- Card 1 -->
+          <div class="scratch-card" data-index="0" id="card-0">
+            <div class="card-inner">
+              <div class="card-badge">壱</div>
+              <div class="hidden-content" id="content-0"></div>
+              <canvas class="scratch-canvas" id="canvas-0" width="180" height="180"></canvas>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="scratch-card" data-index="1" id="card-1">
+            <div class="card-inner">
+              <div class="card-badge">弐</div>
+              <div class="hidden-content" id="content-1"></div>
+              <canvas class="scratch-canvas" id="canvas-1" width="180" height="180"></canvas>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="scratch-card" data-index="2" id="card-2">
+            <div class="card-inner">
+              <div class="card-badge">参</div>
+              <div class="hidden-content" id="content-2"></div>
+              <canvas class="scratch-canvas" id="canvas-2" width="180" height="180"></canvas>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="scratch-card" data-index="3" id="card-3">
+            <div class="card-inner">
+              <div class="card-badge">四</div>
+              <div class="hidden-content" id="content-3"></div>
+              <canvas class="scratch-canvas" id="canvas-3" width="180" height="180"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prize Reference Board (昔ながらの景品一覧) -->
+      <section class="prize-table-card">
+        <div class="prize-table-header">
+          <div class="prize-title-wrap">
+            <span class="prize-stamp">番付</span>
+            <span class="prize-table-title">🎯 当せん等級表</span>
+          </div>
+          <span class="prize-table-note">（必ずだるまが1体以上出ます）</span>
+        </div>
+        <ul class="prize-list" id="prizeList">
+          <li class="prize-item" data-daruma="4">
+            <span class="prize-badge gold" id="dispGrade4">1等</span>
+            <span class="prize-cond">だるま 4体</span>
+            <span class="prize-rate" id="dispRate4">出現率 25%</span>
+          </li>
+          <li class="prize-item" data-daruma="3">
+            <span class="prize-badge silver" id="dispGrade3">2等</span>
+            <span class="prize-cond">だるま 3体</span>
+            <span class="prize-rate" id="dispRate3">出現率 25%</span>
+          </li>
+          <li class="prize-item" data-daruma="2">
+            <span class="prize-badge bronze" id="dispGrade2">3等</span>
+            <span class="prize-cond">だるま 2体</span>
+            <span class="prize-rate" id="dispRate2">出現率 25%</span>
+          </li>
+          <li class="prize-item" data-daruma="1">
+            <span class="prize-badge miss" id="dispGrade1">ハズレ</span>
+            <span class="prize-cond">だるま 1体</span>
+            <span class="prize-rate" id="dispRate1">出現率 25%</span>
+          </li>
+        </ul>
+        <div class="prize-extra-note">
+          <span>※ 右下の「⚙️ 屋台設定」から1等の文言や当せん確率を自由に変更できます！</span>
+        </div>
+      </section>
+
+      <!-- Result Modal / Card (4つすべて削り終わると表示) -->
+      <div id="resultModal" class="result-modal hidden" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+          <!-- Confetti canvas overlay -->
+          <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+          <div class="modal-header">
+            <div class="result-daruma-count" id="resultDarumaText">
+              だるま <span id="darumaCountNum" class="count-highlight">3</span> 体出現！
+            </div>
+            <h2 class="result-title" id="resultTitle">🥈 2等！</h2>
+          </div>
+
+          <div class="result-body">
+            <div class="result-daruma-display" id="resultDarumaDisplay">
+              <!-- Animated mini darumas icons -->
+            </div>
+            <p class="result-message" id="resultMessage">おめでとうございます！大盤振る舞い！</p>
+          </div>
+
+          <div class="modal-actions">
+            <button id="playAgainBtn" class="play-again-btn" type="button">
+              <span class="btn-icon">🔄</span>
+              <span class="btn-text">もう一度遊ぶ</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Modal (屋台の裏設定) -->
+      <div id="settingsModal" class="settings-modal hidden" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
+        <div class="settings-backdrop" id="settingsBackdrop"></div>
+        <div class="settings-card">
+          <div class="settings-header">
+            <div class="settings-title-group">
+              <span class="settings-icon">⚙️</span>
+              <h2 id="settingsModalTitle" class="settings-title">屋台の裏設定</h2>
+            </div>
+            <button id="closeSettingsBtn" class="close-btn" type="button" aria-label="設定を閉じる">✕</button>
+          </div>
+
+          <div class="settings-content">
+            <!-- 1等の文言設定 -->
+            <fieldset class="settings-section">
+              <legend class="section-legend">🥇 1等の文言カスタマイズ</legend>
+              <div class="input-group">
+                <label for="inputTier1Title" class="input-label">1等の等級表示テキスト</label>
+                <input type="text" id="inputTier1Title" class="settings-input" placeholder="例: 🥇 1等！ または ✨ 特賞！" maxlength="25" />
+              </div>
+              <div class="input-group">
+                <label for="inputTier1Message" class="input-label">1等のお祝いメッセージ（改行可）</label>
+                <textarea id="inputTier1Message" class="settings-input" rows="2" placeholder="例: 奇跡のだるま揃い！&#10;最高の福が舞い込みました！" maxlength="100"></textarea>
+              </div>
+
+              <!-- その他の等級もワンタップで展開できるアコーディオン -->
+              <details class="more-tiers-details">
+                <summary class="more-tiers-summary">その他の等級（2等・3等・ハズレ）の文言も変更する</summary>
+                <div class="sub-tiers-inputs">
+                  <div class="input-group">
+                    <label for="inputTier2Title" class="input-label">2等の表示</label>
+                    <input type="text" id="inputTier2Title" class="settings-input" />
+                  </div>
+                  <div class="input-group">
+                    <label for="inputTier3Title" class="input-label">3等の表示</label>
+                    <input type="text" id="inputTier3Title" class="settings-input" />
+                  </div>
+                  <div class="input-group">
+                    <label for="inputTier1MissTitle" class="input-label">ハズレ（1体）の表示</label>
+                    <input type="text" id="inputTier1MissTitle" class="settings-input" />
+                  </div>
+                </div>
+              </details>
+            </fieldset>
+
+            <!-- 確率設定 -->
+            <fieldset class="settings-section">
+              <legend class="section-legend">🎯 当せん確率の変更（%）</legend>
+              <div class="presets-row">
+                <button type="button" id="presetEqualBtn" class="preset-btn active">⚖️ 等倍にする（各25%）</button>
+                <button type="button" id="presetDefaultBtn" class="preset-btn">🏮 通常（50/30/15/5）</button>
+                <button type="button" id="presetAllWinBtn" class="preset-btn">✨ 1等確定（100%）</button>
+              </div>
+
+              <div class="rate-inputs-list">
+                <!-- 1等 (4体) -->
+                <div class="rate-input-row tier-gold-row">
+                  <span class="rate-row-badge gold">1等 (4体)</span>
+                  <input type="range" id="rangeTier4" min="0" max="100" step="1" class="rate-slider" />
+                  <div class="rate-val-box">
+                    <input type="number" id="numTier4" min="0" max="100" class="rate-number" />
+                    <span>%</span>
+                  </div>
+                </div>
+
+                <!-- 2等 (3体) -->
+                <div class="rate-input-row tier-silver-row">
+                  <span class="rate-row-badge silver">2等 (3体)</span>
+                  <input type="range" id="rangeTier3" min="0" max="100" step="1" class="rate-slider" />
+                  <div class="rate-val-box">
+                    <input type="number" id="numTier3" min="0" max="100" class="rate-number" />
+                    <span>%</span>
+                  </div>
+                </div>
+
+                <!-- 3等 (2体) -->
+                <div class="rate-input-row tier-bronze-row">
+                  <span class="rate-row-badge bronze">3等 (2体)</span>
+                  <input type="range" id="rangeTier2" min="0" max="100" step="1" class="rate-slider" />
+                  <div class="rate-val-box">
+                    <input type="number" id="numTier2" min="0" max="100" class="rate-number" />
+                    <span>%</span>
+                  </div>
+                </div>
+
+                <!-- ハズレ (1体) -->
+                <div class="rate-input-row tier-miss-row">
+                  <span class="rate-row-badge miss">ハズレ (1体)</span>
+                  <input type="range" id="rangeTier1" min="0" max="100" step="1" class="rate-slider" />
+                  <div class="rate-val-box">
+                    <input type="number" id="numTier1" min="0" max="100" class="rate-number" />
+                    <span>%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 合計表示 -->
+              <div class="total-rate-row" id="totalRateRow">
+                <span>確率の合計:</span>
+                <strong id="totalRateNum" class="total-rate-val">100%</strong>
+                <span id="rateStatusText" class="rate-status-ok">（適正）</span>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="settings-actions">
+            <button type="button" id="saveSettingsBtn" class="save-settings-btn">
+              <span>💾 設定を保存して新しいくじを引く</span>
+            </button>
+            <button type="button" id="resetDefaultsBtn" class="reset-settings-btn">
+              <span>初期設定に戻す</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Bottom-Right Settings Button (画面右下の設定ボタン) -->
+      <aside class="floating-settings-container">
+        <button id="openSettingsBtn" class="floating-settings-btn" type="button" title="屋台の裏設定を開く">
+          <span class="f-gear">⚙️</span>
+          <span class="f-label">屋台設定</span>
+        </button>
+      </aside>
+
+      <!-- Footer -->
+      <footer class="game-footer">
+        <p class="footer-text">© 縁日ミニだるまスクラッチ</p>
+      </footer>
+    </main>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
